@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+       <script>
+           window.onload = function() {
+             document.getElementById("search").addEventListener(
+                             "click", function(){
+                // go out and get result from request.php
+                if(document.getElementById("myText").value=="ajax"){
+                 new Ajax.Request("request.php?q=ajax",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });
+                }
+                else if(document.getElementById("myText").value=="definition"){
+                        new Ajax.Request("request.php?q=definition",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });
+                }
+                else if(document.getElementById("myText").value=="bar"){
+                        new Ajax.Request("request.php?q=bar",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });
+                }             
+                  
+           });
+
+function doSomethingWithTheResult(data) {
+                        document.getElementById("display").innerHTML = data.responseText;
+                        }
+           }                        
+
+       </script>
+        <title>Ajax Demo of Seach Button</title>
+    </head>
+    <body>
+           <p> Term : <input type="text" id="myText" value=""><button id="search">Define</button>
+           </p>
+           <br>
+           <p>
+              Search for any of the below words to get it's Definition:
+              <br>
+              <blockquote> ajax, definition, bar
+            </p>
+            <br>
+            <div id="display">
+            </div>
+    </body>
+</html>
